@@ -9,7 +9,11 @@ import Login from "./components/Login"
 import Menu from "./components/menu"
 
 // Importa o componente da tela de Inventário
-import Inventario from "./components/Inventario"
+import Inventario from "./components/inventario"
+
+import Importar from "./components/importar"
+
+import Exportar from "./components/exportar"
 
 // Componente principal da aplicação
 function App() {
@@ -22,8 +26,12 @@ function App() {
 
   // O return define o que será renderizado na tela
   return (
+        
     // Div principal que envolve toda a aplicação
     <div>
+      {tela !== "login" && (
+        <Menu mudarTela={setTela} />
+      )}
 
       {/* 
         Se o valor de "tela" for "login",
@@ -39,9 +47,7 @@ function App() {
         o componente Menu será exibido
         mudarTela recebe a função setTela
       */}
-      {tela === "menu" && (
-        <Menu mudarTela={setTela} />
-      )}
+      
 
       {/*
         Se o valor de "tela" for "inventario",
@@ -50,6 +56,17 @@ function App() {
       {tela === "inventario" && (
         <Inventario />
       )}
+
+            {tela === "importar" && (
+        <Importar />
+      )}
+
+
+       {tela === "exportar" && (
+        <Exportar />
+      )}
+
+      
 
     </div> // Fecha a div principal
   )

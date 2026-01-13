@@ -4,6 +4,15 @@ function Inventario() {
   // Controla se a tela mostra a tabela ou o formulário
   const [modo, setModo] = useState("lista")
 
+  // Passo 1: Criar a lista de locais predefinidos
+const locaisPredefinidos = [
+  "Almoxarifado A",
+  "Almoxarifado B",
+  "Almoxarifado C",
+  "Sala de Servidores",
+  "Recepção"
+];
+
 
   // Estado que guarda os itens do inventário (simula o banco)
   const [itens, setItens] = useState([
@@ -62,6 +71,21 @@ function Inventario() {
   const [quantidade, setQuantidade] = useState("")
   const [localizacao, setLocalizacao] = useState("")
 
+  // Coloque isso acima da sua função adicionarItem
+function abrirFormulario() {
+  // 1. Calculamos o próximo número baseado no tamanho da lista
+  const proximoNumero = itens.length + 1;
+  
+  // 2. Criamos o texto do código (ex: COD-6)
+  const novoCodigo = "A" + proximoNumero.toString().padStart(3, "0"); 
+  
+  // 3. Guardamos no estado 'codigo' que você já tem
+  setCodigo(novoCodigo);
+  
+  // 4. Mudamos a tela para o formulário
+  setModo("formulario");
+}
+
   // Função para adicionar um novo item
   function adicionarItem() {
 
@@ -88,7 +112,7 @@ function Inventario() {
 
   return (
     <div>
-        <button onClick={() => setModo("formulario")}>
+        <button onClick={abrirFormulario}>
           ➕ Adicionar Item
         </button>
       {/* TABELA */}
@@ -151,11 +175,18 @@ function Inventario() {
           onChange={e => setQuantidade(e.target.value)}
         />
         <br />
-        <input
-          placeholder="localização"
-          value={localizacao}
-          onChange={e => setLocalizacao(e.target.value)}
-        />
+        {/* Passo 3: Substituir o input pelo select */}
+      
+      <select 
+        value={localizacao} 
+        onChange={e => setLocalizacao(e.target.value)}
+      >
+        {locaisPredefinidos.map((local, index) => (
+          <option key={index} value={local}>
+            {local}
+          </option>
+        ))}
+      </select>
 
         <button onClick={adicionarItem}>Salvar</button>
         <button onClick={() => setModo("lista")}>Cancelar</button>

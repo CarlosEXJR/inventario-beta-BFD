@@ -1,5 +1,6 @@
 // Cria um componente funcional chamado Menu
 // Ele recebe uma propriedade (prop) chamada mudarTela
+
 function Menu({ mudarTela }) {
 
   // O return define o que será exibido na tela
@@ -18,11 +19,33 @@ function Menu({ mudarTela }) {
         A função () => mudarTela("inventario") é uma função anônima
         Ela chama mudarTela passando "inventario" como parâmetro
       */}
+
+      <button onClick={() => mudarTela("menu")}>
+
+        {/* Texto exibido dentro do botão */}
+        Home
+
+      </button>
+
+
       <button onClick={() => mudarTela("inventario")}>
 
         {/* Texto exibido dentro do botão */}
         Inventário
 
+      </button>
+
+      <button onClick={() => mudarTela("importar")}>
+
+        {/* Texto exibido dentro do botão */}
+        Importar
+
+      </button>
+
+            <button onClick={() => mudarTela("exportar")}>
+
+        {/* Texto exibido dentro do botão */}
+        Exportar
       </button>
 
     </div> // Fecha a div principal
