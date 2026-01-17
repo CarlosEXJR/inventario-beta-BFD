@@ -108,6 +108,7 @@ function abrirFormulario() {
     setCategoria("")
     setQuantidade("")
     setLocalizacao("")
+    setModo("lista")
   }
 
   return (
