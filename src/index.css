@@ -2,11 +2,9 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,6 +16,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -30,39 +29,92 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
+/* Barra superior */
+.menu-topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
   background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border-bottom: 1px solid #333;
+  z-index: 1000;
+  box-sizing: border-box;
 }
 
+/* Container dos botões */
+.menu-botoes {
+  display: flex;
+  gap: 15px; 
+  align-items: center;
+  flex-grow: 1;
+  justify-content: flex-start; 
+}
+
+/* --- CORREÇÃO DO BOTÃO --- */
+.menu-botoes button {
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 30px;
+  min-width: 120px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  
+  /* Centralização Real */
+  height: 40px;
+  padding: 0 20px;         /* Padding igual nas laterais, ZERO no topo/baixo */
+  display: inline-flex;    /* Flexbox para alinhar o conteúdo interno */
+  align-items: center;     /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+  line-height: 1;          /* Força o texto a não ter sobra de espaço */
+  box-sizing: border-box;
+}
+
+.menu-botoes button:hover {
+  border-color: #64ffe5;
+  background-color: rgba(100, 108, 255, 0.1);
+}
+
+/* Botão Sair na Direita */
+.btn-sair {
+  margin-left: auto; 
+  order: 99;   
+   
+}
+
+.btn-sair:hover {
+  background-color: #ff4757;
+  border-color: #ff4757;
+}
+
+
+.menu-botoes button:not(.btn-sair) {
+  margin-right: 0;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .menu-topo { height: auto; padding: 15px 20px; flex-wrap: wrap; }
+  .menu-botoes { width: 100%; margin-top: 15px; justify-content: center; flex-wrap: wrap; }
+  .btn-sair { margin-left: 0; }
+}
+
+@media (max-width: 768px) {
+  .menu-topo { flex-direction: column; padding: 15px; }
+  .menu-botoes { flex-direction: column; width: 100%; }
+  .menu-botoes button { width: 100%; max-width: 250px; }
+}
+
+/* Modo claro */
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  :root { color: #213547; background-color: #ffffff; }
+  .menu-topo { background-color: #f9f9f9; border-bottom: 1px solid #e0e0e0; }
+  .menu-botoes button { background-color: #f0f0f0; color: #213547; border: 1px solid #ddd; }
 }

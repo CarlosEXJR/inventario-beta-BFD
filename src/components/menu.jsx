@@ -1,56 +1,19 @@
-// Cria um componente funcional chamado Menu
-// Ele recebe uma propriedade (prop) chamada mudarTela
-
 function Menu({ mudarTela }) {
-
-  // O return define o que será exibido na tela
   return (
+    <header className="menu-topo">
+      <h2 className="menu-titulo"></h2>
 
-    // Div principal que envolve todo o menu
-    // padding: 20 adiciona espaço interno para não ficar colado nas bordas
-    <div style={{ padding: 20 }}>
+      <nav className="menu-botoes">
+        <button onClick={() => mudarTela("menu")}>Home</button>
+        <button onClick={() => mudarTela("inventario")}>Inventário</button>
+        <button onClick={() => mudarTela("importar")}>Importar</button>
+        <button onClick={() => mudarTela("exportar")}>Exportar</button>
+        <button className="btn-sair" onClick={() => mudarTela("login")}>Sair</button>
+      </nav>
+    </header>
+    
 
-      {/* Título da tela de menu principal */}
-      <h2>Menu Principal</h2>
+  )
+}
 
-      {/* 
-        Botão do menu
-        onClick define o que acontece quando o botão é clicado
-        A função () => mudarTela("inventario") é uma função anônima
-        Ela chama mudarTela passando "inventario" como parâmetro
-      */}
-
-      <button onClick={() => mudarTela("menu")}>
-
-        {/* Texto exibido dentro do botão */}
-        Home
-
-      </button>
-
-
-      <button onClick={() => mudarTela("inventario")}>
-
-        {/* Texto exibido dentro do botão */}
-        Inventário
-
-      </button>
-
-      <button onClick={() => mudarTela("importar")}>
-
-        {/* Texto exibido dentro do botão */}
-        Importar
-
-      </button>
-
-            <button onClick={() => mudarTela("exportar")}>
-
-        {/* Texto exibido dentro do botão */}
-        Exportar
-      </button>
-
-    </div> // Fecha a div principal
-  ) // Fecha o return
-} // Fecha a função Menu
-
-// Exporta o componente Menu para que ele possa ser usado em outros arquivos
 export default Menu
