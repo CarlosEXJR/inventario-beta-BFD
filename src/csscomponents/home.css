@@ -1,11 +1,125 @@
-.btshome{
-   
-    padding: 20px;
-
+/* Centraliza a página inteira na tela */
+.btshome {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+    
+    /* CORREÇÃO: Centralização vertical perfeita */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
 }
 
-.btshome button{
-    background-color: black;
-  margin-right: 50px;    /* espaço entre os botões */
-  
+.btshome h1 {
+    color:black;
+    margin-bottom: 40px;
+    font-size: 28px;
+}
+
+/* Container para os botões em linha */
+.btshome .buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Estilo dos botões lado a lado */
+.btshome button {
+    flex: 1;
+    min-width: 300px;
+    max-width: 380px;
+    padding: 25px 20px;
+    text-align: left;
+    
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Efeito hover */
+.btshome button:hover {
+    border-color: #4a6fa5;
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* Títulos dos botões (h2) */
+.btshome button h2 {
+    margin: 0 0 8px 0;
+    color: #2c3e50;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Subtítulo */
+.btshome button .subtitle {
+    margin: 0 0 12px 0;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Texto descritivo */
+.btshome button p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    flex-grow: 1;
+}
+
+/* Linha divisória entre botões */
+.btshome .divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 15px 0 0 0;
+    width: 100%;
+}
+
+/* Mensagem do Windows (nova seção) */
+.windows-notice {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    color: #666;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .btshome button {
+        min-width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .btshome {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        padding-top: 40px;
+    }
+    
+    .btshome .buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btshome button {
+        width: 100%;
+        max-width: 100%;
+    }
 }
