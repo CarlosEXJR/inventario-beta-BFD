@@ -3,6 +3,7 @@ import { useState } from "react"
 
 function Inventario() {
   const [modo, setModo] = useState("lista")
+  const [busca, setBusca] = useState("");
 
   const locaisPredefinidos = [
     "Almoxarifado A",
@@ -98,15 +99,14 @@ function Inventario() {
     <div className="inventario-container">
 
       {/* TOPO */}
-      <div className="inventario-topo">
-        <label>Insira o código da mercadoria</label>
-
-        <div className="inventario-busca">
-          <input placeholder="Busque por nome ou código" />
-          <button>🔍 Pesquisar</button>
-        </div>
+      <div className="inventario-busca">
+        <input 
+          placeholder="Busque por nome ou código" 
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)} // Atualiza o texto da busca
+        />
+        <button>🔍 Pesquisar</button>
       </div>
-
       {/* AÇÕES */}
       <div className="inventario-acoes">
         <button onClick={abrirFormulario}>➕ Adicionar Item</button>
