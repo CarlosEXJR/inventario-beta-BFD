@@ -17,6 +17,8 @@ import Exportar from "./components/exportar"
 
 import Home from "./components/home"
 
+
+
 // Componente principal da aplicação
 function App() {
 
@@ -72,7 +74,7 @@ function App() {
         <Home mudarTela={setTela} />
       )}
 
-      
+         
 
     </div> // Fecha a div principal
   )
