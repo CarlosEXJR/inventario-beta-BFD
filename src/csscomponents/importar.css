@@ -1,10 +1,15 @@
 .importar-container {
-  min-height: calc(100vh - 64px);
-  padding-top: 100px;
-  background-color: #f5f5f5;
+ margin-top: 100px; 
+  
+  /* 2. Garante que o conteúdo fique centralizado */
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
+  
+  /* 3. Evita que a tela fique "cortada" em monitores menores */
+  min-height: 80vh; 
+  padding: 20px;
 }
 
 /* CARD PRINCIPAL */
