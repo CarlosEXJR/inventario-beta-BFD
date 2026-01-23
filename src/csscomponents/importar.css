@@ -1,21 +1,23 @@
 .importar-container {
+    /* O uso de calc garante que o conteúdo não fique "preso" sob o menu */
     min-height: calc(100vh - 64px);
     padding-top: 100px;
-    background-color: #1f2933; /* Fundo escuro igual a Home */
+    background-color: var(--bg-fundo); /* Variável global */
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background 0.3s ease;
 }
 
 .titulo-sessao {
-    color: #4a90e2;
+    color: var(--azul-destaque);
     font-size: 2rem;
     margin-bottom: 30px;
 }
 
 .card-importar {
-    background: #2b3640; /* Fundo do card igual a Home */
-    border: 1px solid #ffffff;
+    background: var(--bg-card); /* Variável que muda entre azul escuro e branco */
+    border: 1px solid var(--borda-card);
     border-radius: 12px;
     padding: 30px;
     width: 100%;
@@ -23,27 +25,26 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    transition: all 0.3s ease; /* Para o efeito de saltar */
+    transition: all 0.3s ease; /* Permite o efeito de saltar suavemente */
 }
 
-/* EFEITO DE SALTAR */
+/* EFEITO DE SALTAR PADRONIZADO */
 .card-importar:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    border-color: #4a90e2;
+    border-color: var(--azul-destaque);
 }
 
 .card-header-importar h3 {
-    color: #ffffff;
+    color: var(--texto-cor);
     margin: 0;
 }
 
 .subtitulo-card {
-    color: #9aa5b1;
+    color: var(--texto-secundario);
     font-size: 0.85rem;
 }
 
-/* BOTÃO DE ESCOLHER ARQUIVO */
 .label-upload {
     background-color: #3e4c59;
     color: #ffffff;
@@ -56,13 +57,8 @@
     transition: 0.2s;
 }
 
-.label-upload:hover {
-    background-color: #4a90e2;
-}
-
-/* BOTÃO DE CONFIRMAR */
 .btn-confirmar-import {
-    background-color: #4a90e2;
+    background-color: var(--azul-destaque);
     color: white;
     border: none;
     padding: 15px;
@@ -70,6 +66,11 @@
     font-weight: bold;
     cursor: pointer;
     font-size: 1rem;
+    transition: transform 0.2s;
+}
+
+.btn-confirmar-import:active {
+    transform: scale(0.98); /* Pequeno efeito de clique */
 }
 
 .btn-confirmar-import:disabled {

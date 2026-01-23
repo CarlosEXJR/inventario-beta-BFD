@@ -1,143 +1,128 @@
-/* RESET BÁSICO */
-* {
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* CONTAINER CENTRAL */
 .inventario-container {
-  width: 100%;
-  min-height: calc(100vh - 64px);
-  padding: 20px;
-  padding-top: 90px; /* 64px do menu + folga */
-  background-color: #1a1a2e;
+    width: 100%;
+    min-height: calc(100vh - 64px);
+    padding: 40px 20px;
+    padding-top: 100px;
+    background-color: var(--bg-fundo);
+    transition: background 0.3s ease;
 }
 
-
-/* TOPO */
-.inventario-topo {
-  margin-bottom: 20px;
-}
-
-.inventario-topo label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 5px;
+/* CABEÇALHO DA BUSCA */
+.inventario-header-flex {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    gap: 20px;
 }
 
 .inventario-busca {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    flex: 1;
+    max-width: 400px;
 }
 
 .inventario-busca input {
-  padding: 8px 10px;
-  width: 260px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--borda-card);
+    border-radius: 8px 0 0 8px;
+    background: var(--bg-card);
+    color: var(--texto-cor);
 }
 
-.inventario-busca button {
-  padding: 8px 14px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.btn-pesquisar {
+    background: var(--azul-destaque);
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 8px 8px 0;
+    color: white;
+    cursor: pointer;
 }
 
-.inventario-busca button:hover {
-  opacity: 0.85;
+.btn-adicionar {
+    background: var(--azul-destaque);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-/* BOTÕES AÇÃO (Editar / Salvar / Adicionar) */
-.inventario-acoes {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-bottom: 15px;
+.btn-adicionar:hover { transform: translateY(-3px); }
+
+/* TABELA PROFISSIONAL */
+.tabela-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--borda-card);
 }
 
-
-.inventario-acoes button {
-  padding: 7px 14px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #eaeaea;
-  cursor: pointer;
-}
-
-.inventario-acoes button:hover {
-  background-color: #dcdcdc;
-}
-
-/* TABELA */
 .inventario-tabela {
-  width: 100%;
-  margin-top: 15px;
-  background-color: #2b3640; 
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--texto-cor);
 }
-
 
 .inventario-tabela thead {
-  background-color: #f0f0f0;
+    background-color: var(--azul-destaque);
+    color: white;
 }
 
-.inventario-tabela th,
-.inventario-tabela td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-  text-align: left;
-}
-
-.inventario-tabela th {
-  font-weight: bold;
+.inventario-tabela th, .inventario-tabela td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--borda-card);
 }
 
 .inventario-tabela tbody tr:hover {
-  background-color: #f9f9f9;
+    background-color: rgba(74, 144, 226, 0.1); /* Realce suave no hover */
 }
 
-/* FORMULÁRIO */
-.formulario {
-  background-color: #fff;
-  padding: 20px;
-  width: 350px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+/* FORMULÁRIO ESTILIZADO COMO MODAL */
+.formulario-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
-.formulario h3 {
-  margin-bottom: 15px;
+.formulario-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid var(--borda-card);
 }
 
-.formulario input,
-.formulario select {
-  width: 100%;
-  padding: 8px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+.formulario-card h3 { color: var(--texto-cor); margin-bottom: 20px; }
 
-.formulario-botoes {
-  display: flex;
-  justify-content: space-between;
+.formulario-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--borda-card);
+    background: var(--bg-fundo);
+    color: var(--texto-cor);
 }
 
 .formulario-botoes button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
 }
 
-.formulario-botoes .salvar {
-  background-color: #000;
-  color: #fff;
-}
-
-.formulario-botoes .cancelar {
-  background-color: #ccc;
-}
+.formulario-botoes .salvar { background: var(--azul-destaque); color: white; }
+.formulario-botoes .cancelar { background: #e53e3e; color: white; }
