@@ -1,77 +1,90 @@
-/* 1. DEFINIÇÃO DAS CORES (PALETA GELO E ESCURA) */
+/* 1. DEFINIÇÃO DAS CORES (A BIBLIOTECA DO SISTEMA) */
 :root {
-  /* TEMA CLARO - AJUSTADO PARA O MENU APARECER */
-  --bg-fundo: #8d9fb6;           
-  --bg-card: #f8fafc;            
-  --bg-menu: #f1f5f9;            /* Cinza bem claro, mas sólido */
-  --texto-cor: #1e293b;          /* Azul grafite escuro para os botões do menu */
-  --texto-secundario: #64748b;   
-  --borda-card: #cbd5e1;         
-  --azul-destaque: #3b82f6;      
+  /* TEMA CLARO - Ativado por padrão */
+  --bg-fundo: #8d9fb6;          /* Cor de fundo principal (azul acinzentado) */
+  --bg-card: #f8fafc;           /* Fundo dos cartões e tabelas */
+  --bg-menu: #f1f5f9;           /* Fundo da barra superior fixa */
+  --texto-cor: #1e293b;         /* Cor principal dos textos e botões */
+  --texto-secundario: #64748b;  /* Cor para descrições e detalhes menores */
+  --borda-card: #cbd5e1;        /* Cor das linhas separadoras e contornos */
+  --azul-destaque: #3b82f6;     /* Cor de foco (links, hover e botões principais) */
 }
 
+/* 2. TEMA ESCURO - Sobrescreve as variáveis acima quando [data-theme='dark'] existe no <html> */
 [data-theme='dark'] {
-  /* TEMA ESCURO */
-  --bg-fundo: #1a1a2e;
-  --bg-card: #2b3640;
-  --bg-menu: #111111;            /* Fundo preto sólido para o menu no dark */
-  --texto-cor: #ffffff;
+  --bg-fundo: #1a1a2e;          /* Azul marinho profundo */
+  --bg-card: #2b3640;           /* Cinza azulado para destacar do fundo */
+  --bg-menu: #111111;           /* Preto sólido para foco total no conteúdo */
+  --texto-cor: #ffffff;         /* Branco para leitura no fundo escuro */
   --texto-secundario: #9aa5b1;
-  --borda-card: #ffffff;
-  --azul-destaque: #4a90e2;
+  --borda-card: #ffffff;        /* Borda branca para contorno visível no escuro */
+  --azul-destaque: #4a90e2;     /* Azul um pouco mais vibrante */
 }
 
-/* 2. REGRAS GERAIS */
+/* 3. REGRAS GERAIS DE COMPORTAMENTO */
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: var(--bg-fundo); /* Agora o fundo muda sozinho! */
+  /* O body muda de cor automaticamente porque escuta as variáveis */
+  background-color: var(--bg-fundo); 
   color: var(--texto-cor);
   font-family: Arial, sans-serif;
+  /* Transição suave para o usuário não sentir um impacto visual brusco ao trocar o tema */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 3. BARRA SUPERIOR (MENU) */
+/* 4. BARRA SUPERIOR (MENU FIXO) */
 .menu-topo {
-  position: fixed;
+  position: fixed; /* Fica preso no topo mesmo ao rolar a página */
   top: 0; left: 0;
   width: 100%;
   height: 64px;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Distribui os 3 blocos */
+  justify-content: space-between; /* Divide o menu em: Título | Botões Centro | Botões Direita */
   padding: 0 30px;
-  background-color: var(--bg-menu);
+  background-color: var(--bg-menu); /* Usa a cor de fundo do menu dinâmica */
   border-bottom: 1px solid var(--borda-card);
-  z-index: 1000;
+  z-index: 1000; /* Garante que fique acima de tabelas e cards */
   box-sizing: border-box;
 }
 
-/* Garante que o título e a direita tenham o mesmo espaço para o centro ficar real */
+/* Layout do Menu (Flexbox) */
 .menu-titulo, .menu-direita {
-  flex: 1; 
+    flex: 1;
+    display: flex;
+    align-items: center; /* Alinha a imagem verticalmente no centro */
 }
 
-/* CENTRALIZAÇÃO DOS BOTÕES PRINCIPAIS */
 .menu-central {
   display: flex;
   gap: 20px;
   justify-content: center;
-  flex: 2; /* Dá mais espaço para o meio */
+  flex: 2; /* Ocupa o dobro de espaço para os botões principais ficarem no centro */
 }
 
-/* ALINHAMENTO DA DIREITA */
 .menu-direita {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
   align-items: center;
 }
+.logo-menu {
+  height: 45px;        /* Define a altura da sua imagem */
+  width: auto;         /* Ajusta a largura automaticamente para não amassar */
+  cursor: pointer;     /* Mostra a "mãozinha" ao passar o mouse */
+  transition: 0.3s;    /* Deixa o efeito de hover suave */
+}
 
-/* BOTÕES GERAIS */
+.logo-menu:hover {
+  filter: brightness(1.2); /* Dá um leve brilho ao passar o mouse */
+  transform: scale(1.02);  /* Aumenta levemente o tamanho */
+}
+
+/* Estilo dos botões do Menu */
 .menu-topo button {
   background: transparent;
-  color: var(--texto-cor);
+  color: var(--texto-cor); /* A cor do texto do botão muda com o tema */
   border: none;
   cursor: pointer;
   font-size: 14px;
@@ -80,23 +93,32 @@ body {
 }
 
 .menu-topo button:hover {
-  color: var(--azul-destaque);
+  color: var(--azul-destaque); /* Realce ao passar o mouse */
 }
 
-/* DEIXANDO O BOTÃO DE TEMA BONITO COMO NA SUA FOTO */
+/* BOTÃO DE TEMA (O Interruptor Visual) */
 .btn-tema {
+  /* O !important garante que esse estilo vença outras regras mais gerais */
   border: 1px solid var(--azul-destaque) !important;
   border-radius: 20px !important;
   padding: 5px 15px !important;
 }
 
 .btn-sair {
-  color: #ff4757 !important;
+  color: #ff4757 !important; /* Cor vermelha fixa para indicar ação de saída */
 }
 
-/* 5. RESPONSIVIDADE */
+/* 5. RESPONSIVIDADE - Ajusta o menu para celulares */
 @media (max-width: 768px) {
-  .menu-topo { height: auto; padding: 10px; flex-direction: column; }
-  .menu-botoes { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+  .menu-topo { 
+    height: auto; 
+    padding: 10px; 
+    flex-direction: column; /* Empilha os itens um sobre o outro no mobile */
+  }
+  .menu-botoes { 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    margin-top: 10px; 
+  }
   .menu-botoes button { min-width: 100px; }
 }

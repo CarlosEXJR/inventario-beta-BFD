@@ -1,5 +1,7 @@
-// Importa o arquivo CSS externo para aplicar os estilos e cores (incluindo as variáveis de tema)
 import '../csscomponents/home.css'
+import imgImportar from '../assets/img/botao-importar.png'
+import imgInventario from '../assets/img/botao-inventario.png'
+import imgExportar   from '../assets/img/botao-exportar.png'
 
 // Define o componente funcional Home, recebendo a função 'mudarTela' como propriedade (prop)
 function Home({ mudarTela }) {
@@ -11,46 +13,53 @@ function Home({ mudarTela }) {
             
             {/* Container flexível que organiza os três botões (cards) lado a lado ou em coluna */}
             <div className="buttons-container">
-                
-                {/* Botão/Card de Inventário: executa a função mudarTela passando o destino "inventario" */}
-                <button onClick={() => mudarTela("inventario")}>
-                    {/* Título interno do card */}
-                    <h2>Inventário</h2>
-                    {/* Subtítulo curto para identificação rápida */}
-                    <p className="subtitle">Produtos em estoque</p>
-                    {/* Texto descritivo sobre as funcionalidades da tela de inventário */}
-                    <p>Visualize, pesquise e edite a lista completa de produtos em estoque. 
-                       Acompanhe a quantidade e o status de cada item em tempo real.</p>
-                    {/* Linha horizontal decorativa no rodapé do card */}
-                    <hr className="divider" />
-                </button>
+    
+    {/* 1. CARD DE INVENTÁRIO */}
+    <button onClick={() => mudarTela("inventario")}>
+        <div className="card-header">
+            <img src={imgInventario} alt="Inventário" className="card-icon" />
+        </div>
+        <div className="card-body">
+            <h2>Inventário</h2>
+            <p className="subtitle">Produtos em estoque</p>
+            <p>
+                Visualize e gerencie todos os itens armazenados. Acompanhe quantidades, 
+                status e detalhes de cada produto em tempo real.
+            </p>
+        </div>
+    </button>
 
-                {/* Botão/Card de Importação: executa a função mudarTela passando o destino "importar" */}
-                <button onClick={() => mudarTela("importar")}>
-                    {/* Título interno do card */}
-                    <h2>Importar XLS</h2>
-                    {/* Subtítulo curto indicando a ação de upload */}
-                    <p className="subtitle">Upload de planilhas</p>
-                    {/* Descrição explicando a facilidade de atualização em massa via Excel */}
-                    <p>Realize o upload de planilhas (XLS) para adicionar novos produtos ou 
-                       atualizar grandes volumes de dados de estoque de uma só vez.</p>
-                    {/* Linha horizontal decorativa no rodapé do card */}
-                    <hr className="divider" />
-                </button>
+    {/* 2. CARD DE IMPORTAÇÃO */}
+    <button onClick={() => mudarTela("importar")}>
+        <div className="card-header">
+            <img src={imgImportar} alt="Importar" className="card-icon" />
+        </div>
+        <div className="card-body">
+            <h2>Importar XLS</h2>
+            <p className="subtitle">Upload de planilhas</p>
+            <p>
+                Adicione novos produtos ou atualize seu estoque em massa enviando 
+                arquivos XLS de forma rápida e segura.
+            </p>
+        </div>
+    </button>
 
-                {/* Botão/Card de Exportação: executa a função mudarTela passando o destino "exportar" */}
-                <button onClick={() => mudarTela("exportar")}>
-                    {/* Título interno do card */}
-                    <h2>Exportar XLS</h2>
-                    {/* Subtítulo focado em relatórios e auditoria */}
-                    <p className="subtitle">Relatórios de estoque</p>
-                    {/* Explicação sobre a geração de arquivos para análise externa */}
-                    <p>Gere e baixe relatórios de estoque personalizados (inventário, entradas, 
-                       saídas e movimentações) para análise e auditoria externa.</p>
-                    {/* Linha horizontal decorativa no rodapé do card */}
-                    <hr className="divider" />
-                </button>
-            </div>
+    {/* 3. CARD DE EXPORTAÇÃO */}
+    <button onClick={() => mudarTela("exportar")}>
+        <div className="card-header">
+            <img src={imgExportar} alt="Exportar" className="card-icon" />
+        </div>
+        <div className="card-body">
+            <h2>Exportar XLS</h2>
+            <p className="subtitle">Relatórios de estoque</p>
+            <p>
+                Gere planilhas detalhadas para auditoria ou controle externo, 
+                baixando os dados atuais do seu estoque com um clique.
+            </p>
+        </div>
+    </button>
+
+</div>
         </div>
     )
 }

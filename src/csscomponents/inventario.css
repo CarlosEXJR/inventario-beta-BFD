@@ -1,13 +1,15 @@
+/* Container que envolve toda a página de listagem */
 .inventario-container {
     width: 100%;
+    /* Altura total menos o menu fixo para evitar barras de rolagem estranhas */
     min-height: calc(100vh - 64px);
     padding: 40px 20px;
-    padding-top: 100px;
+    padding-top: 100px; /* Espaço para o menu não cobrir a busca */
     background-color: var(--bg-fundo);
     transition: background 0.3s ease;
 }
 
-/* CABEÇALHO DA BUSCA */
+/* CABEÇALHO DA BUSCA - Alinha a barra de pesquisa à esquerda e o botão 'Novo' à direita */
 .inventario-header-flex {
     display: flex;
     justify-content: space-between;
@@ -16,6 +18,7 @@
     gap: 20px;
 }
 
+/* Área do campo de entrada da busca */
 .inventario-busca {
     display: flex;
     flex: 1;
@@ -26,20 +29,24 @@
     flex: 1;
     padding: 12px;
     border: 1px solid var(--borda-card);
+    /* Arredonda apenas os cantos da esquerda para encaixar no botão da lupa */
     border-radius: 8px 0 0 8px;
     background: var(--bg-card);
     color: var(--texto-cor);
 }
 
+/* Botão da lupa (pesquisar) */
 .btn-pesquisar {
     background: var(--azul-destaque);
     border: none;
     padding: 0 20px;
+    /* Arredonda apenas os cantos da direita */
     border-radius: 0 8px 8px 0;
     color: white;
     cursor: pointer;
 }
 
+/* Botão verde/azul de "Novo Item" */
 .btn-adicionar {
     background: var(--azul-destaque);
     color: white;
@@ -53,22 +60,23 @@
 
 .btn-adicionar:hover { transform: translateY(-3px); }
 
-/* TABELA PROFISSIONAL */
+/* TABELA PROFISSIONAL - O wrapper ajuda a criar bordas arredondadas na tabela */
 .tabela-wrapper {
     max-width: 1200px;
     margin: 0 auto;
     background: var(--bg-card);
     border-radius: 12px;
-    overflow: hidden;
+    overflow: hidden; /* Garante que as linhas da tabela não saiam do arredondamento */
     border: 1px solid var(--borda-card);
 }
 
 .inventario-tabela {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; /* Remove espaços duplos entre as bordas das células */
     color: var(--texto-cor);
 }
 
+/* Cabeçalho fixo da tabela com a cor principal do sistema */
 .inventario-tabela thead {
     background-color: var(--azul-destaque);
     color: white;
@@ -80,21 +88,23 @@
     border-bottom: 1px solid var(--borda-card);
 }
 
+/* Efeito Zebra/Hover: destaca a linha quando o usuário passa o mouse */
 .inventario-tabela tbody tr:hover {
-    background-color: rgba(74, 144, 226, 0.1); /* Realce suave no hover */
+    background-color: rgba(74, 144, 226, 0.1); 
 }
 
-/* FORMULÁRIO ESTILIZADO COMO MODAL */
+/* FORMULÁRIO ESTILIZADO COMO MODAL - Fundo escurecido que cobre tudo */
 .formulario-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.7); /* Fundo preto transparente */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000; /* Garante que fique acima do menu e da tabela */
 }
 
+/* Cartão central do formulário de cadastro */
 .formulario-card {
     background: var(--bg-card);
     padding: 30px;
@@ -106,14 +116,22 @@
 
 .formulario-card h3 { color: var(--texto-cor); margin-bottom: 20px; }
 
+/* Campos de entrada dentro do modal */
 .formulario-card input {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 8px;
     border: 1px solid var(--borda-card);
-    background: var(--bg-fundo);
+    background: var(--bg-fundo); /* Inverte a cor para dar contraste com o card */
     color: var(--texto-cor);
+}
+
+/* Alinhamento dos botões Salvar e Cancelar */
+.formulario-botoes {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
 }
 
 .formulario-botoes button {

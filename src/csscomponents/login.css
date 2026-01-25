@@ -1,42 +1,66 @@
+/* Container principal do formulário de Login */
 .login {
-    background-color: #ffffff; /* Cor do card */
-    border: 3px solid #5a09db;
+    /* Antes: #ffffff -> Agora usa a cor dinâmica do card */
+    background-color: var(--bg-card); 
+    /* Antes: #5a09db -> Agora usa o azul/roxo padrão do sistema */
+    border: 3px solid var(--azul-destaque); 
     border-radius: 50px;
     padding: 30px;
     width: 320px;
     text-align: center;
     
-    /* Centralização */
+    /* Centralização absoluta */
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     
-    /* Sombra leve */
+    /* Sombra que se adapta sutilmente ao fundo */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Transição suave para quando o tema mudar */
+    transition: all 0.3s ease;
 }
 
+/* Título principal do Login */
 .login h2 {
     margin-bottom: 20px;
-    color: #333;
+    /* Antes: #333 -> Agora segue a cor de texto do tema */
+    color: var(--texto-cor); 
 }
 
+/* Estilização dos campos de Usuário e Senha */
 .login input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    /* Antes: #ccc -> Agora usa a cor de borda do tema */
+    border: 1px solid var(--borda-card); 
     border-radius: 4px;
     box-sizing: border-box;
-}
-h6{
-    color: black;
-    margin-top: 0px;
+    /* Garante que o fundo do input também mude no modo dark */
+    background-color: var(--bg-fundo);
+    color: var(--texto-cor);
 }
 
+/* Texto de "Esqueci minha senha" */
+h6 {
+    /* Antes: black -> Agora segue a cor principal do texto */
+    color: var(--texto-cor);
+    margin-top: 0px;
+    cursor: pointer;
+}
+.menu-direita{
+    display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Botão principal de acesso */
 .login button {
-    background-color: black;
-    color: white;
+    /* Antes: black -> Agora usa o destaque do sistema para ser o foco */
+    background-color: var(--azul-destaque);
+     /* Mantemos branco para contraste no botão */
     border: none;
     padding: 12px 24px;
     border-radius: 4px;
@@ -45,4 +69,10 @@ h6{
     margin: 20px 0;
     width: 100%;
     margin-top: 0px;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Efeito de clique no botão */
+.login button:active {
+    transform: scale(0.98);
 }

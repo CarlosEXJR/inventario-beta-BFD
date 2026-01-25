@@ -1,30 +1,26 @@
 // Importamos os Hooks necessários: useState para o estado do tema e useEffect para aplicar as mudanças
 import { useState, useEffect } from 'react';
+import logoMarca from '../assets/img/logo1.png';
 
 function Menu({ mudarTela }) {
   // Inicializamos o estado 'dark'. Ele tenta ler a preferência salva no navegador; 
   // se não houver nada (primeiro acesso), ele começa como 'true' (Modo Escuro)
-  const [dark, setDark] = useState(() => {
-    const salvo = localStorage.getItem("tema_preferido");
-    return salvo ? JSON.parse(salvo) : true;
-  });
+  const [dark, setDark] = useState(true) 
 
   // O useEffect executa toda vez que a variável 'dark' sofrer uma alteração
   useEffect(() => {
     // Aplica o atributo 'data-theme' na tag <html> do site. 
     // É isso que faz o CSS trocar as variáveis :root pelas [data-theme='dark']
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-    
-    // Grava a escolha atual no LocalStorage para que o site "lembre" na próxima visita
-    localStorage.setItem("tema_preferido", JSON.stringify(dark));
   }, [dark]);
 
   return (
     // Barra superior com posicionamento fixo e cores baseadas em var(--bg-menu)
     <header className="menu-topo">
       
-      {/* Lado Esquerdo: Identificação da empresa ou logo do sistema */}
-      <h2 className="menu-titulo">Solutions</h2>
+      <div className="menu-titulo">
+            <img src={logoMarca} alt="Solutions Company" className="logo-menu" />
+      </div>
 
       {/* Centro: Navegação principal. Cada botão chama a função de troca de tela */}
       <nav className="menu-central">

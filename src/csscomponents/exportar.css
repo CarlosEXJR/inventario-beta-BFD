@@ -1,74 +1,94 @@
+/* Container principal - Centraliza o título e o conteúdo verticalmente */
 .exportar-container {
-    /* Mantém o alinhamento abaixo do menu */
-    min-height: calc(100vh - 64px);
-    padding-top: 120px;
-    background-color: var(--bg-fundo); /* Variável global */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px 60px; 
+    min-height: 100vh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* Centraliza os itens horizontalmente dentro do container */
+    align-items: center; 
+    background-color: var(--bg-fundo); 
     transition: background 0.3s ease;
 }
 
+/* Título da seção */
 .titulo-sessao {
-    color: var(--azul-destaque); /* Azul padronizado */
-    font-size: 2rem;
-    margin-bottom: 40px;
-    font-family: sans-serif;
+    color: var(--texto-cor); 
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 50px;
+    /* Garante que o texto fique centralizado */
+    text-align: center; 
 }
 
+/* O "Wrapper" - O segredo da centralização está aqui */
 .exportar-wrapper {
     display: flex;
-    justify-content: center;
+    /* Troquei flex-start por center para o botão ir para o meio */
+    justify-content: center; 
+    align-items: center;
     width: 100%;
 }
 
-/* O BOTÃO ESTILIZADO COMO CARD */
+/* O Card (Botão) */
 .card-exportar {
-    background-color: var(--bg-card); /* Alterna entre azul escuro e branco */
-    border: 1px solid var(--borda-card); /* Alterna a cor da borda */
-    border-radius: 12px;
-    padding: 30px;
     width: 100%;
-    max-width: 420px;
-    text-align: left;
+    max-width: 400px; /* Largura levemente maior para destaque */
+    padding: 0;
+    background-color: var(--bg-card); 
+    border: none;
+    border-radius: 28px; /* Bordas um pouco mais suaves */
     cursor: pointer;
-    transition: all 0.3s ease; /* Suaviza o salto e a troca de cores */
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais "premium" */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
+/* Efeito de flutuação no Hover */
 .card-exportar:hover {
-    background-color: var(--bg-fundo);;
-    border-color: var(--azul-destaque);
-    transform: translateY(-8px); /* Salto padronizado */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-12px); 
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
-.card-header-exportar h3 {
-    color: var(--texto-cor); /* Texto que alterna entre branco e escuro */
-    font-size: 1.5rem;
-    margin: 0;
-}
-
-.subtitulo-card {
-    color: var(--texto-secundario);
-    font-size: 0.9rem;
-    display: block;
-    margin-top: 5px;
-}
-
-.descricao-card {
-    color: var(--texto-secundario);
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin: 0;
-    font-weight: 300;
-}
-
-.linha-decorativa {
-    height: 1px;
-    background-color: #4e5d6c;
+/* Cabeçalho do Card (Área da Imagem) */
+.card-header {
+    background-color: #e0e7ff; 
     width: 100%;
-    margin-top: 10px;
+    height: 220px; /* Um pouco mais alto para destacar a imagem central */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Área do Texto (Corpo) */
+.card-body {
+    padding: 35px;
+    text-align: center; /* Centralizei o texto interno para combinar com o layout */
+}
+.card-icon {
+    width: 350px; 
+    height: auto;
+    border-radius: 15px;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+}
+
+.card-body h2 {
+    color: var(--texto-cor); 
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.card-body .subtitle {
+    color: var(--texto-secundario);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.card-body .description {
+    color: var(--texto-secundario);
+    font-size: 1rem;
+    line-height: 1.6;
 }

@@ -1,5 +1,6 @@
 // Importa a biblioteca 'xlsx', responsável por converter dados em arquivos de Excel
 import * as XLSX from 'xlsx';
+import imgExportar from '../assets/img/botao-exportar.png'
 
 // Importa o arquivo CSS específico desta tela
 import '../csscomponents/exportar.css';
@@ -45,20 +46,17 @@ function Exportar() {
         {/* O card principal. Ao ser clicado, chama a função de download definida acima */}
         <button className="card-exportar" onClick={baixarPlanilha}>
           
-          {/* Cabeçalho interno do card com título e subtítulo */}
-          <div className="card-header-exportar">
-            <h3>Exportar XLS</h3>
-            {/* Texto secundário que usa 'var(--texto-secundario)' para não ofuscar */}
-            <span className="subtitulo-card">Relatórios de estoque</span>
-          </div>
-
-          {/* Parágrafo com a explicação detalhada da funcionalidade */}
-          <p className="descricao-card">
-            Gere e baixe relatórios de estoque personalizados (inventário, entradas, saídas e movimentações) para análise e auditoria externa.
-          </p>
-
-          {/* Div usada apenas para o detalhe visual da linha no rodapé do card */}
-          <div className="linha-decorativa"></div>
+           <div className="card-header">
+                  <img src={imgExportar} alt="Exportar" className="card-icon" />
+                  </div>
+                  <div className="card-body">
+                      <h2>Exportar XLS</h2>
+                      <p className="subtitle">Relatórios de estoque</p>
+                      <p>
+                          Gere planilhas detalhadas para auditoria ou controle externo, 
+                          baixando os dados atuais do seu estoque com um clique.
+                      </p>
+                  </div>
         </button>
       </div>
     </div>
