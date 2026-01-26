@@ -1,40 +1,52 @@
 import { useState } from 'react'; 
 import '../csscomponents/login.css';
 
+/**
+ * COMPONENTE LOGIN
+ * Responsável por capturar credenciais, validar o acesso e gerenciar
+ * a alternância para a tela de recuperação de senha.
+ */
 function Login({ onLogin }) {
+  // Estado que define se mostramos o formulário de Login (false) ou Recuperação (true)
   const [verRecuperar, setVerRecuperar] = useState(false);
   
-  // Estados para Login
+  // Estados que armazenam em tempo real o que é digitado nos campos de acesso
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
   
-  // Estado para E-mail de Recuperação
+  // Estado que armazena o e-mail na tela de recuperação
   const [email, setEmail] = useState("");
 
   /**
-   * Validação de Login: Simula acesso com '123'
+   * LÓGICA DE ENTRADA
+   * Verifica se as credenciais conferem com o padrão '123'.
+   * Se correto, chama a função 'onLogin' vinda do App.jsx.
    */
   const handleEntrar = () => {
     if (usuario === "123" && senha === "123") {
-      onLogin();
+      onLogin(); // Libera o acesso ao sistema
     } else {
+      // Feedback amigável para erro de digitação
       alert("Usuário ou senha incorretos!\nDica: Use '123' para ambos.");
     }
   };
 
   /**
-   * Validação de E-mail: Verifica se existe o caractere '@'
+   * LÓGICA DE RECUPERAÇÃO
+   * Realiza uma validação básica de formato de e-mail (presença do @).
    */
   const handleRecuperar = () => {
     if (!email.includes("@")) {
       alert("Por favor, insira um e-mail válido (deve conter @).");
     } else {
       alert(`Link de recuperação enviado para: ${email}`);
-      setVerRecuperar(false); // Volta para o login após sucesso
+      setVerRecuperar(false); // Retorna o usuário para a tela de login
     }
   };
 
-  // --- TELA DE RECUPERAÇÃO ---
+  /**
+   * INTERFACE DE RECUPERAÇÃO DE SENHA
+   */
   if (verRecuperar) {
     return (
       <div className="login">
@@ -47,6 +59,7 @@ function Login({ onLogin }) {
           type="email" 
           placeholder="E-mail cadastrado" 
           value={email}
+          // Sincroniza o que é digitado com o estado 'email'
           onChange={(e) => setEmail(e.target.value)}
         />
         
@@ -68,7 +81,9 @@ function Login({ onLogin }) {
     );
   }
 
-  // --- TELA DE ACESSO (LOGIN) ---
+  /**
+   * INTERFACE PRINCIPAL DE LOGIN
+   */
   return (
     <div className="login">
       <h2>Acessar Sistema</h2>
@@ -78,12 +93,14 @@ function Login({ onLogin }) {
           type="text" 
           placeholder="Usuário" 
           value={usuario}
+          // Atualiza o estado 'usuario' a cada tecla pressionada
           onChange={(e) => setUsuario(e.target.value)}
         />
         <input 
           type="password" 
           placeholder="Senha" 
           value={senha}
+          // Atualiza o estado 'senha' a cada tecla pressionada
           onChange={(e) => setSenha(e.target.value)}
         />
       </div>
@@ -95,6 +112,7 @@ function Login({ onLogin }) {
         Esqueci minha senha
       </h6>
 
+      {/* Dispara a função de validação ao clicar */}
       <button onClick={handleEntrar}>Entrar</button>
     </div>
   );

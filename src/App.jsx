@@ -2,7 +2,7 @@
 import { useState } from "react"
 
 // --- IMPORTAÇÃO DOS COMPONENTES (Páginas do Sistema) ---
-import Login from "./components/Login"      
+import Login from "./components/login"      
 import Menu from "./components/menu"        
 import Inventario from "./components/inventario" 
 import Importar from "./components/importar"   
