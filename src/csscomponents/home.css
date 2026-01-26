@@ -1,13 +1,15 @@
-/* Container Principal - REMOVIDO o absolute para os cards poderem se alinhar */
+/* Container Principal */
 .btshome {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 120px 20px 60px; /* Espaço para o menu fixo no topo */
-    text-align: left; /* Alinhamento à esquerda conforme a imagem de referência */
+    padding: 120px 20px 60px;
+    text-align: left;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    background-color: var(--bg-fundo); /* Aplica o fundo dinâmico */
+    min-height: 100vh;
 }
 
 /* Título principal da Home */
@@ -23,57 +25,56 @@
 /* Container que organiza os cards LADO A LADO */
 .btshome .buttons-container {
     display: flex;
-    flex-direction: row; /* Força os cards a ficarem na mesma linha */
-    flex-wrap: wrap;     /* Permite quebra de linha apenas em telas pequenas */
-    gap: 30px;           /* Espaçamento entre os cards */
-    justify-content: flex-start; /* Alinha o início à esquerda */
-    align-items: stretch; /* Faz todos os cards terem a mesma altura */
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: flex-start;
+    align-items: stretch;
 }
 
 /* Estilização dos Botões (Cards) */
 .btshome button {
-    flex: 1;             /* Faz os cards dividirem o espaço igualmente */
-    min-width: 320px;    /* Impede que o card fique muito "magro" */
-    max-width: 380px;    /* Impede que o card fique largo demais */
+    flex: 1;
+    min-width: 320px;
+    max-width: 380px;
     display: flex;
     flex-direction: column;
     padding: 0; 
     overflow: hidden; 
-    border-radius: 25px; /* Bordas bem arredondadas da referência */
+    border-radius: 25px;
     background-color: var(--bg-card);
-    border: none;
+    /* Adicionada borda dinâmica para o modo escuro ter contorno */
+    border: 1px solid var(--borda-card); 
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Efeito de Hover */
 .btshome button:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--azul-destaque); /* Destaque na borda ao passar o mouse */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* Área da Imagem no Topo */
 .card-header {
-    background-color: #e0e7ff; /* Azul Gelo */
+    background-color: var(--bg-menu); /* Usando bg-menu para um leve contraste interno */
     width: 100%;
-    height: 200px; /* Altura generosa para o ícone */
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: background 0.3s ease;
-}
-
-/* Ajuste para o modo escuro na área do ícone */
-[data-theme='dark'] .card-header {
-    background-color: #2d3748;
+    border-bottom: 1px solid var(--borda-card);
 }
 
 /* Estilo do Ícone */
 .card-icon {
-    width: 400px; 
-    height: auto;
-    border-radius: 15px;
+    width: auto; 
+    
+    height: 250px;
+    object-fit: contain;
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
 }
 
@@ -83,7 +84,7 @@
     text-align: left;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* Garante que o corpo preencha o card */
+    flex-grow: 1;
 }
 
 .card-body h2 {
@@ -96,7 +97,7 @@
 .card-body .subtitle {
     display: block;
     margin: 8px 0 15px 0;
-    color: var(--texto-secundario);
+    color: var(--azul-destaque); /* Subtítulos agora usam a cor de destaque */
     font-size: 1.1rem;
     font-weight: 500;
 }

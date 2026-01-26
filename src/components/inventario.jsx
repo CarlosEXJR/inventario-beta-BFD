@@ -1,128 +1,117 @@
-// Importa o CSS específico para a tabela e o formulário de inventário
 import '../csscomponents/inventario.css'
-// Importa os Hooks para gerenciar estados (useState) e efeitos colaterais (useEffect)
 import { useState, useEffect } from "react"
 
 function Inventario() {
-  // Estado que controla se o usuário vê a "lista" de produtos ou o "formulario" de cadastro
-  const [modo, setModo] = useState("lista")
-  // Estado que armazena o texto digitado no campo de busca para filtrar a tabela
   const [busca, setBusca] = useState("");
 
-  // Inicializa o estado 'itens' buscando dados do LocalStorage ou usando valores padrão caso esteja vazio
+  // 1. Estado dos Itens (Dados Totais)
   const [itens, setItens] = useState(() => {
     const dadosSalvos = localStorage.getItem("meu_inventario");
-    // Se existirem dados, converte de volta para objeto; se não, inicia com 2 itens de exemplo
     return dadosSalvos ? JSON.parse(dadosSalvos) : [
-      { id: 1, codigo: "A001", nome: "Teclado Mecânico", quantidade: 10 },
-      { id: 2, codigo: "M015", nome: "Monitor LED 24\"", quantidade: 5 }
+      
     ];
   });
 
-  // useEffect: Sempre que a lista de 'itens' mudar, salva a nova versão no LocalStorage automaticamente
+  const [historico, setHistorico] = useState(() => {
+    const salvos = localStorage.getItem("historico_exportacao");
+    return salvos ? JSON.parse(salvos) : [];
+  });
+
+  // Persistência
   useEffect(() => {
+    localStorage.setItem("historico_exportacao", JSON.stringify(historico));
     localStorage.setItem("meu_inventario", JSON.stringify(itens));
-  }, [itens]);
+  }, [historico, itens]);
 
-  // Estados locais para os campos do formulário de novo item
-  const [codigo, setCodigo] = useState("")
-  const [nome, setNome] = useState("")
-  const [quantidade, setQuantidade] = useState("")
+  // 2. Lógica de Filtro 
+  // Se busca estiver vazia, retorna tudo. Se tiver texto, filtra.
+  const resultadosDaBusca = itens.filter(item => {
+    const termo = busca.toLowerCase().trim();
+    if (!termo) return true; // Se vazio, não filtra nada
 
-  // Prepara o formulário: gera um código automático baseado no tamanho da lista e muda a tela
-  function abrirFormulario() {
-    const proximoNumero = itens.length + 1
-    const novoCodigo = "A" + proximoNumero.toString().padStart(3, "0")
-    setCodigo(novoCodigo)
-    setModo("formulario")
-  }
+    // Transforma a linha em texto para busca total
+    const conteudoLinha = Object.values(item).join(" ").toLowerCase();
+    return conteudoLinha.includes(termo);
+  });
 
-  // Cria um novo objeto de produto e adiciona à lista de itens existente
-  function adicionarItem() {
-    const novoItem = {
-      id: itens.length + 1,
-      codigo,
-      nome,
-      quantidade: Number(quantidade),
-      atualizado_em: new Date().toLocaleString() // Adiciona data e hora da criação
+  const salvarPesquisaNoHistorico = () => {
+    if (!busca.trim() || resultadosDaBusca.length === 0) {
+        alert("Digite algo na busca antes de salvar!");
+        return;
     }
-    // Atualiza a lista espalhando os itens antigos e adicionando o novo ao final
-    setItens([...itens, novoItem])
-    // Limpa os campos do formulário após salvar
-    setCodigo(""); setNome(""); setQuantidade("");
-    // Retorna para a visualização da tabela
-    setModo("lista")
-  }
+    const nomeRelatorio = prompt("Nome do relatório:");
+    if (!nomeRelatorio) return; 
 
-  // Lógica de filtro: cria uma lista temporária apenas com itens que batem com a busca (nome ou código)
-  const itensFiltrados = itens.filter(item => 
-    item.nome.toLowerCase().includes(busca.toLowerCase()) || 
-    item.codigo.toLowerCase().includes(busca.toLowerCase())
-  );
+    const novaEntrada = {
+        id: Date.now(),
+        nome: nomeRelatorio,
+        data: new Date().toLocaleString(),
+        dados: [...resultadosDaBusca] 
+    };
+
+    setHistorico([...historico, novaEntrada]);
+    alert("Resultados salvos!");
+  };
 
   return (
     <div className="inventario-container">
-      {/* Cabeçalho com barra de pesquisa e botão de adicionar */}
       <div className="inventario-header-flex">
         <div className="inventario-busca">
           <input 
-            placeholder="Busque por nome ou código" 
-            value={busca}
-            onChange={(e) => setBusca(e.target.value)} 
+              type="text"
+              placeholder="Digite para filtrar..." 
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)} 
           />
-          <button className="btn-pesquisar">🔍</button>
+          {busca && <button className="btn-clear" onClick={() => setBusca("")}>✕</button>}
         </div>
 
-        <div className="inventario-acoes">
-          <button className="btn-adicionar" onClick={abrirFormulario}>➕ Novo Item</button>
-        </div>
+        <button className="btn-salvar-busca" onClick={salvarPesquisaNoHistorico}>
+            💾 Salvar Filtro
+        </button>
       </div>
 
-      {/* Renderização condicional: Só mostra a tabela se o modo for "lista" */}
-      {modo === "lista" && (
-        <div className="tabela-wrapper">
-          <table className="inventario-tabela">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>COD.</th>
-                <th>DESCRIÇÃO</th>
-                <th>QTD</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* Mapeia os itens filtrados para gerar as linhas da tabela (tr) */}
-              {itensFiltrados.map(item => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.codigo}</td>
-                  <td>{item.nome}</td>
-                  <td>{item.quantidade}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      <div className="inventario-contador">
+        <p>
+          {busca.trim() === "" 
+            ? `Mostrando total de ${itens.length} itens` 
+            : `Exibindo ${resultadosDaBusca.length} resultado(s) para sua busca`}
+        </p>
+      </div>
 
-      {/* Renderização condicional: Só mostra o formulário (modal) se o modo for "formulario" */}
-      {modo === "formulario" && (
-        <div className="formulario-overlay">
-          <div className="formulario-card">
-            <h3>Novo Cadastro</h3>
-            <input placeholder="Código" value={codigo} onChange={e => setCodigo(e.target.value)} />
-            <input placeholder="Nome do Produto" value={nome} onChange={e => setNome(e.target.value)} />
-            <input placeholder="Quantidade" type="number" value={quantidade} onChange={e => setQuantidade(e.target.value)} />
-            
-            <div className="formulario-botoes">
-              <button className="salvar" onClick={adicionarItem}>Confirmar</button>
-              <button className="cancelar" onClick={() => setModo("lista")}>Voltar</button>
-            </div>
-          </div>
-        </div>
-      )}
+      <div className="tabela-wrapper">
+        <table className="inventario-tabela">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>COD.</th>
+              <th>DESCRIÇÃO</th>
+              <th>QTD</th>
+            </tr>
+          </thead>
+          {/* O segredo: o <tbody> renderiza APENAS o array filtrado */}
+          <tbody>
+            {resultadosDaBusca.length > 0 ? (
+              resultadosDaBusca.map((item, index) => (
+                <tr key={item.id || index}>
+                  <td>{item.id || index + 1}</td>
+                  <td>{String(item.codigo || item.CODIGO || "S/C")}</td>
+                  <td>{item.nome || item.NOME || item.descricao || item.DESCRICAO || "---"}</td>
+                  <td>{item.quantidade ?? item.QUANTIDADE ?? 0}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                  Nenhum item encontrado para "{busca}".
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
 
-export default Inventario
+export default Inventario;

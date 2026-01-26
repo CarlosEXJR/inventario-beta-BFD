@@ -1,94 +1,130 @@
-/* Container principal - Centraliza o título e o conteúdo verticalmente */
 .exportar-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 100px 20px 60px; 
+    padding: 120px 20px 40px; 
     min-height: 100vh;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    /* Centraliza os itens horizontalmente dentro do container */
-    align-items: center; 
-    background-color: var(--bg-fundo); 
-    transition: background 0.3s ease;
+    background-color: var(--bg-fundo);
 }
 
-/* Título da seção */
-.titulo-sessao {
-    color: var(--texto-cor); 
-    font-size: 2.8rem;
-    font-weight: 600;
-    margin-bottom: 50px;
-    /* Garante que o texto fique centralizado */
-    text-align: center; 
-}
-
-/* O "Wrapper" - O segredo da centralização está aqui */
-.exportar-wrapper {
-    display: flex;
-    /* Troquei flex-start por center para o botão ir para o meio */
-    justify-content: center; 
-    align-items: center;
-    width: 100%;
-}
-
-/* O Card (Botão) */
-.card-exportar {
-    width: 100%;
-    max-width: 400px; /* Largura levemente maior para destaque */
-    padding: 0;
+.banner-exportar-geral {
     background-color: var(--bg-card); 
-    border: none;
-    border-radius: 28px; /* Bordas um pouco mais suaves */
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição mais "premium" */
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-}
-
-/* Efeito de flutuação no Hover */
-.card-exportar:hover {
-    transform: translateY(-12px); 
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-}
-
-/* Cabeçalho do Card (Área da Imagem) */
-.card-header {
-    background-color: #e0e7ff; 
-    width: 100%;
-    height: 220px; /* Um pouco mais alto para destacar a imagem central */
+    border: 1px solid var(--borda-card);
+    padding: 30px;
+    border-radius: 16px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 50px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
-/* Área do Texto (Corpo) */
-.card-body {
-    padding: 35px;
-    text-align: center; /* Centralizei o texto interno para combinar com o layout */
-}
-.card-icon {
-    width: 350px; 
-    height: auto;
-    border-radius: 15px;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-}
-
-.card-body h2 {
+.banner-texto h2 { 
     color: var(--texto-cor); 
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+    margin: 0; 
+    font-size: 1.5rem; 
 }
 
-.card-body .subtitle {
-    color: var(--texto-secundario);
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-    display: block;
+.banner-texto p { 
+    color: var(--texto-secundario); 
+    margin: 5px 0 0 0; 
 }
 
-.card-body .description {
+
+.btn-geral {
+    background: var(--azul-destaque);
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Reação ao passar o mouse (Hover) */
+.btn-geral:hover {
+    background-color: var(--azul-destaque); /* Muda para sua cor de destaque */
+    color: #ffffff; /* Texto branco para contraste no azul */
+    border-color: var(--azul-destaque);
+    transform: translateY(-3px); /* Pequeno pulo para cima */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+}
+
+/* Reação ao clicar (Active) */
+.btn-geral:active {
+    transform: translateY(-1px); /* Volta levemente ao clicar */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.exportar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card-relatorio {
+    background: var(--bg-card);
+    border: 1px solid var(--borda-card);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card-relatorio:hover {
+    transform: translateY(-5px);
+}
+
+.card-header-mini {
+    background: var(--bg-menu);
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
     color: var(--texto-secundario);
-    font-size: 1rem;
-    line-height: 1.6;
+    border-bottom: 1px solid var(--borda-card);
+}
+
+.card-body-mini { 
+    padding: 20px; 
+}
+
+.card-body-mini h3 { 
+    color: var(--texto-cor); 
+    margin-bottom: 20px; 
+    font-size: 1.2rem; 
+}
+
+.acoes { 
+    display: flex; 
+    gap: 10px; 
+}
+
+.btn-baixar-mini {
+    flex: 1;
+    background: var(--azul-destaque);
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-excluir-mini {
+    background: #c0392b; /* Vermelho mantido para exclusão */
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-excluir-mini:hover {
+    opacity: 0.9;
 }
